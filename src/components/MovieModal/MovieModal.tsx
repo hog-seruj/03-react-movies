@@ -23,9 +23,12 @@ function MovieModal({ movie, onClose }: MovieModalProps) {
     };
 
     document.addEventListener('keydown', handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow;
     };
   }, [onClose]);
 
@@ -45,7 +48,7 @@ function MovieModal({ movie, onClose }: MovieModalProps) {
           &times;
         </button>
         <img
-          src={'https://image.tmdb.org/t/p/original/' + movie.poster_path}
+          src={'https://image.tmdb.org/t/p/original/' + movie.backdrop_path}
           alt={movie.title}
           className={css.image}
         />

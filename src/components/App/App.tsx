@@ -14,17 +14,9 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-    document.body.style.overflow = 'hidden';
-  };
 
   const closeModal = () => {
-    setIsModalOpen(false);
     setSelectedMovie(null);
-    document.body.style.overflow = '';
   };
 
   const handleRequest = async (movie: string) => {
@@ -36,18 +28,15 @@ function App() {
         toast.error('No movies found for your request.');
       }
       setMovies(data);
-    } catch (error) {
+    } catch {
       setIsError(true);
-      throw error;
     } finally {
       setIsLoading(false);
     }
   };
 
-  const onSelectHandler = (id: number) => {
-    const currentMovie = movies.find((item) => item.id === id) as Movie;
-    setSelectedMovie(currentMovie);
-    openModal();
+  const onSelectHandler = (movie: Movie) => {
+    setSelectedMovie(movie);
   };
 
   return (
@@ -59,7 +48,7 @@ function App() {
       {movies.length > 0 && (
         <MovieGrid onSelect={onSelectHandler} movies={movies} />
       )}
-      {isModalOpen && selectedMovie && (
+      {selectedMovie && (
         <MovieModal movie={selectedMovie} onClose={closeModal} />
       )}
     </>
