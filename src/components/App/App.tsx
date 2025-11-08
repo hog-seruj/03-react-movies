@@ -16,11 +16,15 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = () => {
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
 
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedMovie(null);
+    document.body.style.overflow = '';
   };
 
   const handleRequest = async (movie: string) => {
