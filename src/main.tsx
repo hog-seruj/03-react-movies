@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import 'modern-normalize/modern-normalize.css';
 import './main.css'
 import App from './components/App/App.tsx'
 
